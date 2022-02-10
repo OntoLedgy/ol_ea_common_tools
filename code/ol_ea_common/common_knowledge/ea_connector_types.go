@@ -103,6 +103,3 @@ func (eaConnectorTypes EaConnectorTypes) get_type_from_name() string {
 	}
 	return "unknown"
 }
-
-
-
