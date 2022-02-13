@@ -1,8 +1,8 @@
 package objects
 
-//from nf_common_source.code.services.file_system_service.objects.files import Files
+import "github.com/OntoLedgy/storage_interop_services/code/services/disk/file_system_service/object_model"
 
 type EaRepositories struct {
-	short_name         string
-	ea_repository_file string //Files
+	ShortName        string
+	EaRepositoryFile object_model.Files
 }

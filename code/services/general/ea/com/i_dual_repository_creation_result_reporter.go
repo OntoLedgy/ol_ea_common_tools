@@ -1,52 +1,66 @@
 package com
 
-func create_ea_repository(
-	ea_repository_file string, //Files,
-	short_name string) EaRepositories {
+import (
+	"fmt"
+	"github.com/OntoLedgy/ea_interop_service/code/return_results"
+)
 
-	eaRepository := new
-	EaRepositories()
+//def ReportIDualRepositoryCreationResult(
+func ReportIDualRepositoryCreationResult(
 
-	return eaRpository
+	//i_dual_repository_creation_result: IDualRepositoryCreationResults,
+	i_dual_repository_creation_result *return_results.IDualRepositoryCreationResults,
+
+	//ea_project_filename: str):
+	ea_project_filename string) {
+
+	//i_dual_repository_creation_result_type = \
+	i_dual_repository_creation_result_type :=
+		//i_dual_repository_creation_result.i_dual_repository_creation_result_type
+		i_dual_repository_creation_result.IDualRepositoryCreationResultType
+
+	switch i_dual_repository_creation_result_type {
+
+	//if i_dual_repository_creation_result_type == IDualRepositoryCreationResultTypes.SUCCEEDED:
+	case return_results.SUCCEEDED:
+
+		//log_message(
+		//'Opened EA project: ' + ea_project_filename)
+		fmt.Println(
+			"Opened EA project: " + ea_project_filename)
+
+		return
+
+	//if i_dual_repository_creation_result_type == IDualRepositoryCreationResultTypes.FAILED_TO_OPEN_EA:
+	case return_results.FAILED_TO_OPEN_EA:
+		//log_message(
+		fmt.Println(
+
+			//'Failed to open EA')
+			"Failed to open EA")
+
+		return
+
+	//if i_dual_repository_creation_result_type == IDualRepositoryCreationResultTypes.FAILED_TO_OPEN_EA_PROJECT:
+	case return_results.FAILED_TO_OPEN_EA_PROJECT:
+
+		//log_message(
+		fmt.Println(
+
+			//'Failed to open EA project: ' + ea_project_filename)
+			"Failed to open EA project: " + ea_project_filename)
+
+		//else:
+	default:
+		//log_message(
+		fmt.Printf(
+
+			//'Unhandled type: ' + str(i_dual_repository_creation_result_type))
+			"Unhandled type: %v\n ", i_dual_repository_creation_result_type)
+
+		//sys.exit(
+		//-1)
+		panic("unknown type")
+	}
+
 }
-
-i_dual_repository_creation_result = \
-get_i_dual_repository_creation_result(
-ea_project_filename = ea_repository_file.absolute_path_string)
-
-report_i_dual_repository_creation_result(
-i_dual_repository_creation_result = i_dual_repository_creation_result,
-ea_project_filename = ea_repository_file.absolute_path_string)
-
-i_dual_repository = \
-i_dual_repository_creation_result.i_dual_repository
-
-if not isinstance(i_dual_repository, IDualRepository):
-log_message(
-message = 'Cannot create repository from ' + ea_repository_file.absolute_path_string)
-
-sys.exit(
--1)
-
-ea_repository = \
-EaRepositories(
-ea_repository_file = ea_repository_file,
-short_name =short_name)
-
-EaRepositoryMappers.store_map(
-ea_repository = ea_repository,
-i_dual_repository = i_dual_repository)
-
-return \
-ea_repository
-
-
-def create_empty_ea_repository(
-short_name: str) \
--> EaRepositories:
-ea_repository = \
-EaRepositories(
-short_name = short_name)
-
-return \
-ea_repository
