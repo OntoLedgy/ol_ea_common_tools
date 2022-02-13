@@ -31,6 +31,7 @@ func (EaRepositoryMappers) store_map(
 	//i_dual_repository: IDualRepository):
 	i_dual_repository i_dual_objects.IDualRepository) {
 
+	//TODO add mapping
 	//EaRepositoryMappers.__map.add_mapping(
 	//domain_value=ea_repository,
 	//range_value=i_dual_repository)
