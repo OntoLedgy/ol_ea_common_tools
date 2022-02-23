@@ -1,6 +1,14 @@
 package com
 
+import (
+	"github.com/OntoLedgy/storage_interop_services/code/services/disk/file_system_service"
+	"github.com/OntoLedgy/storage_interop_services/code/services/disk/file_system_service/object_model"
+)
+
 //class EaComManagers:
+type EaComManagers struct {
+}
+
 //def __enter__(
 //self):
 //return \
@@ -12,12 +20,17 @@ package com
 //exception_value,
 //traceback):
 //pass
-//
+
 //@staticmethod
 //def get_ea_repository_file() \
-//-> Files:
-//file = \
-//select_file()
-//
-//return \
-//file
+func GetEaRepositoryFile() *object_model.Files { //-> Files:
+
+	//file = \
+	//select_file()
+
+	file := file_system_service.SelectFile()
+
+	//return \
+	//file
+	return file
+}

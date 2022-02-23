@@ -4,5 +4,5 @@ import "github.com/OntoLedgy/storage_interop_services/code/services/disk/file_sy
 
 type EaRepositories struct {
 	ShortName        string
-	EaRepositoryFile object_model.Files
+	EaRepositoryFile *object_model.Files
 }

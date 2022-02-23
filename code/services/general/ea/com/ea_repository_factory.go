@@ -7,21 +7,22 @@ import (
 )
 
 func CreateEaRepository(
-	eaRepositoryFile object_model.Files,
+	eaRepositoryFile *object_model.Files,
 	eaRepositoryShortName string) *objects.EaRepositories {
 
-	//i_dual_repository_creation_result := get_i_dual_repository_creation_result(
+	//i_dual_repository_creation_result :=
 	i_dual_repository_creation_result :=
+		//get_i_dual_repository_creation_result(
 		processes.GetIDualRepositoryCreationResult(
-			//					eaRepositoryFile.absolute_path_string)
-			"")
+			//eaRepositoryFile.absolute_path_string)
+			eaRepositoryFile.AbsolutePathString())
 
 	//ReportIDualRepositoryCreationResult(
-	//	i_dual_repository_creation_result = i_dual_repository_creation_result,
-	//	ea_project_filename = eaRepositoryFile.absolute_path_string)
 	ReportIDualRepositoryCreationResult(
+		//	i_dual_repository_creation_result = i_dual_repository_creation_result,
 		i_dual_repository_creation_result,
-		"")
+		//	ea_project_filename = eaRepositoryFile.absolute_path_string)
+		eaRepositoryFile.AbsolutePathString())
 
 	//i_dual_repository = \
 	i_dual_repository :=
@@ -35,7 +36,7 @@ func CreateEaRepository(
 	//sys.exit(
 	//	-1)
 
-	i_dual_repository.Initialise()
+	i_dual_repository.InitialiseRepository()
 
 	//ea_repository = \
 	eaRepository :=
