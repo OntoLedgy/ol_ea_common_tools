@@ -36,7 +36,7 @@ const (
 	PACKAGE_HIERARCHY
 )
 
-func (eaCollectionTypes EaCollectionTypes) get_collection_name() string {
+func (eaCollectionTypes EaCollectionTypes) GetCollectionName() string {
 
 	switch eaCollectionTypes {
 

@@ -6,8 +6,6 @@ import (
 	"github.com/OntoLedgy/storage_interop_services/code/services/disk/file_system_service/object_model"
 )
 
-//
-//
 //import tkinter as tk
 //from tkinter import simpledialog
 //from nf_common_source.code.services.file_system_service.objects.files import Files
@@ -15,8 +13,7 @@ import (
 //from nf_ea_common_tools_source.b_code.services.general.ea.com.ea_repository_factory import create_ea_repository
 //from nf_ea_common_tools_source.b_code.services.general.ea.com.ea_repository_factory import create_empty_ea_repository
 //from nf_ea_common_tools_source.b_code.nf_ea_common.objects.ea_repositories import EaRepositories
-//
-//
+
 //def get_repository() \
 //-> EaRepositories:
 func GetRepository() *objects.EaRepositories {

@@ -1,0 +1,1 @@
+package non_explicit_objects
