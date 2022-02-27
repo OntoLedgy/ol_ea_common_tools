@@ -1,13 +1,17 @@
 package com
 
 import (
+	"fmt"
 	"github.com/OntoLedgy/ea_interop_service/code/i_dual_objects"
 	"github.com/OntoLedgy/ea_interop_service/code/processes"
+	uuid "github.com/satori/go.uuid"
 )
 
 //class EaComUniverses:
 type EaComUniverses struct {
-	iDualRepository i_dual_objects.IRepository
+	iDualRepository  i_dual_objects.IRepository
+	InstanceGuid     uuid.UUID
+	ConnectionString string
 }
 
 //def __init__(
@@ -17,7 +21,7 @@ func (eaComUniverses *EaComUniverses) Initialise(
 	eaProjectFileName string) {
 
 	//i_dual_repository_creation_result = \
-	i_dual_repository_creation_result :=
+	iDualRepositoryCreationResult :=
 		//get_i_dual_repository_creation_result(
 		processes.GetIDualRepositoryCreationResult(
 			//ea_project_filename=ea_project_filename)
@@ -26,22 +30,22 @@ func (eaComUniverses *EaComUniverses) Initialise(
 	//report_i_dual_repository_creation_result(
 	ReportIDualRepositoryCreationResult(
 		//i_dual_repository_creation_result=i_dual_repository_creation_result,
-		i_dual_repository_creation_result,
+		iDualRepositoryCreationResult,
 		//ea_project_filename=ea_project_filename)
 		eaProjectFileName)
 
 	//if not isinstance(i_dual_repository_creation_result.i_dual_repository, IDualRepository):
+
 	//log_message(
 	//message='Cannot create repository from ' + ea_project_filename)
 	//
 	//sys.exit(
 	//-1)
-	//
 
 	//self.i_dual_repository = \
 	eaComUniverses.iDualRepository =
 		//i_dual_repository_creation_result.i_dual_repository
-		i_dual_repository_creation_result.IDualRepository
+		iDualRepositoryCreationResult.IDualRepository
 
 	//self.__open_project_report()
 	eaComUniverses.open_project_report()
@@ -51,6 +55,7 @@ func (eaComUniverses *EaComUniverses) Initialise(
 //self):
 //return \
 //self
+
 //def __exit__(
 //self,
 //exception_type,
@@ -60,18 +65,29 @@ func (eaComUniverses *EaComUniverses) Initialise(
 
 //def __open_project_report(
 //self):
-func (EaComUniverses) open_project_report() {
+func (eaComUniverses EaComUniverses) open_project_report() {
 	//log_message(
-	//"Instance GUID: " +
-	//self.i_dual_repository.instance_guid)
-	//
+	fmt.Println(
+		//"Instance GUID: " +
+		"Instance GUID: " +
+			//self.i_dual_repository.instance_guid)
+			eaComUniverses.InstanceGuid.String())
+
 	//log_message(
-	//"Connection string: " +
-	//self.i_dual_repository.connection_string)
-	//
+	fmt.Println(
+		//"Connection string: " +
+		"Connection string: " +
+			//self.i_dual_repository.connection_string)
+			eaComUniverses.ConnectionString)
+
+	//iDualRepository := eaComUniverses.iDualRepository.(i_dual_objects.IDualRepository)
+
 	//log_message(
-	//"Library version: " +
+	fmt.Println(
+		//"Library version: " +
+		"Library version: " + "XX") //TODO- add reference
 	//str(self.i_dual_repository.library_version))
+	//	iDualRepository.LiberaryVersion)
 }
 
 //def close_project(

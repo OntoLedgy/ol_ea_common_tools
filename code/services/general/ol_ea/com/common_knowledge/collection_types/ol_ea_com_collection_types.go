@@ -88,13 +88,20 @@ const (
 //@staticmethod
 //def get_collection_type_from_name(
 //name: str):
-func GetCollectionTypeFromName(name string) {
+func GetCollectionTypeFromName(
+	name string) *OlEaComCollectionTypes {
 
 	//for collection_type, collection_name in collection_name_mapping.items():
-	//if collection_name == name:
-	//return \
-	//collection_type
+	for collection_type, collection_name := range collection_name_mapping {
+		//if collection_name == name:
+		if collection_name == name {
 
+			//return \
+			//collection_type
+			return &collection_type
+		}
+	}
+	return nil
 }
 
 //def __collection_name(
@@ -105,13 +112,88 @@ func GetCollectionTypeFromName(name string) {
 //
 //return \
 //collection_name
-//
+
 //collection_name = \
 //property(
 //fget=__collection_name)
 
 //collection_name_mapping = \
-func (olEaCollectionTypes OlEaComCollectionTypes) GetCollectionName() string {
+var collection_name_mapping = map[OlEaComCollectionTypes]string{
+	EA_PACKAGES:                    "ea_packages",
+	EA_CLASSIFIERS:                 "ea_classifiers",
+	EA_ATTRIBUTES:                  "ea_attributes",
+	EA_CONNECTORS:                  "ea_connectors",
+	EA_CONNECTORS_PC:               "ea_connectors_pc",
+	EA_STEREOTYPES:                 "ea_stereotypes",
+	STEREOTYPE_USAGE:               "stereotype_usage",
+	THIN_EA_EXPLICIT_OBJECTS:       "thin_ea_explicit_objects",
+	THIN_EA_REPOSITORIED_OBJECTS:   "thin_ea_repositoried_objects",
+	THIN_EA_STEREOTYPEABLE_OBJECTS: "thin_ea_stereotypeable_objects",
+	THIN_EA_PACKAGEABLE_OBJECTS:    "thin_ea_packageable_objects",
+	THIN_EA_ELEMENTS:               "thin_ea_elements",
+	THIN_EA_CLASSIFIERS:            "thin_ea_classifiers",
+	THIN_EA_PACKAGES:               "thin_ea_packages",
+	THIN_EA_DIAGRAMS:               "thin_ea_diagrams",
+	THIN_EA_CONNECTORS:             "thin_ea_connectors",
+	THIN_EA_STEREOTYPES:            "thin_ea_stereotypes",
+	THIN_EA_ATTRIBUTES:             "thin_ea_attributes",
+	THIN_EA_ELEMENT_COMPONENTS:     "thin_ea_element_components",
+	THIN_EA_OPERATIONS:             "thin_ea_operations",
+	EA_DIAGRAMS:                    "ea_diagrams",
+	EA_STEREOTYPE_GROUPS:           "ea_stereotype_groups",
+	EA_OPERATIONS:                  "ea_operations",
+	EA_OBJECT_STEREOTYPES:          "ea_object_stereotypes",
+	EA_CONNECTOR_TYPES:             "ea_connector_types",
+	EA_ELEMENT_TYPES:               "ea_element_types",
+	EA_DIAGRAM_TYPES:               "ea_diagram_types",
+	EA_CARDINALITIES:               "ea_cardinalities",
+	EA_FULL_GENERALISATIONS:        "ea_full_generalisations",
+	EA_FULL_DEPENDENCIES:           "ea_full_dependencies",
+	EA_NEAREST_PACKAGES:            "ea_nearest_packages",
+	EA_FULL_PACKAGES:               "ea_full_packages",
+	EA_PACKAGE_CONTENTS_SUMMARY:    "ea_package_contents_summary",
+	SUMMARY_TABLE_BY_TYPE:          "summary_table_by_type",
+	DEPENDENCY_DEPTHS_TABLE:        "dependency_depths_table",
+	ANALYSIS_METRICS:               "analysis_metrics",
+	//# From		model		stats		code
+	MODEL_STATS_GENERAL_CONNECTORS_BY_TYPE: "general_connector_by_type",
+	MODEL_STATS_GENERAL_EDGES:              "general_edges",
+	MODEL_STATS_GENERAL_LEAVES:             "general_leaves",
+	MODEL_STATS_GENERAL_NODES:              "general_nodes",
+	MODEL_STATS_GENERAL_OBJECTS_BY_TYPE:    "general_objects_by_type",
+	MODEL_STATS_GENERAL_PATHS:              "general_paths",
+	MODEL_STATS_GENERAL_ROOTS:              "general_roots",
+	MODEL_STATS_GENERAL_SUMMARY_TABLE:      "general_summary_table",
+
+	MODEL_STATS_PROXY_PROCESS_CONNECTORS_BY_TYPE: "proxies_connector_by_type",
+	MODEL_STATS_PROXY_PROCESS_EDGES:              "proxies_edges",
+	MODEL_STATS_PROXY_PROCESS_LEAVES:             "proxies_leaves",
+	MODEL_STATS_PROXY_PROCESS_NODES:              "proxies_nodes",
+	MODEL_STATS_PROXY_PROCESS_OBJECTS_BY_TYPE:    "proxies_objects_by_type",
+	MODEL_STATS_PROXY_PROCESS_PATHS:              "proxies_paths",
+	MODEL_STATS_PROXY_PROCESS_ROOTS:              "proxies_roots",
+	MODEL_STATS_PROXY_PROCESS_SUMMARY_TABLE:      "proxies_summary_table",
+
+	MODEL_STATS_FULL_DEPENDENCIES_EDGES:         "full_dependencies_edges",
+	MODEL_STATS_FULL_DEPENDENCIES_LEAVES:        "full_dependencies_leaves",
+	MODEL_STATS_FULL_DEPENDENCIES_NODES:         "full_dependencies_nodes",
+	MODEL_STATS_FULL_DEPENDENCIES_PATHS:         "full_dependencies_paths",
+	MODEL_STATS_FULL_DEPENDENCIES_ROOTS:         "full_dependencies_roots",
+	MODEL_STATS_FULL_DEPENDENCIES_SUMMARY_TABLE: "full_dependencies_summary_table",
+
+	MODEL_STATS_FIRST_CLASS_RELATION_EDGES:          "FCR_edges",
+	MODEL_STATS_FIRST_CLASS_RELATION_LEAVES:         "FCR_leaves",
+	MODEL_STATS_FIRST_CLASS_RELATION_NODES:          "FCR_nodes",
+	MODEL_STATS_FIRST_CLASS_RELATION_ROOTS:          "FCR_roots",
+	MODEL_STATS_FIRST_CLASS_RELATION_IMPLICIT_EDGES: "FCR_implicit_edges",
+
+	MODEL_STATS_HIGH_ORDER_TYPES_EDGES:          "HOT_edges",
+	MODEL_STATS_HIGH_ORDER_TYPES_LEAVES:         "HOT_leaves",
+	MODEL_STATS_HIGH_ORDER_TYPES_NODES:          "HOT_nodes",
+	MODEL_STATS_HIGH_ORDER_TYPES_ROOTS:          "HOT_roots",
+	MODEL_STATS_HIGH_ORDER_TYPES_IMPLICIT_EDGES: "HOT_implicit_edges"}
+
+func (olEaCollectionTypes OlEaComCollectionTypes) String() string {
 
 	switch olEaCollectionTypes {
 	case EA_PACKAGES:

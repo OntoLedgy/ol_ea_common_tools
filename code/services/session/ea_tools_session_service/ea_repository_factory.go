@@ -34,7 +34,7 @@ func GetRepository() *objects.EaRepositories {
 	//ea_repository = \
 	eaRepository :=
 		//get_repository_using_file_and_short_name(
-		getRepositoryUsingFileAndShortName(
+		GetRepositoryUsingFileAndShortName(
 			eaRepositoryFile,
 			shortName)
 
@@ -49,7 +49,7 @@ func GetRepository() *objects.EaRepositories {
 }
 
 //def get_repository_using_file_and_short_name(
-func getRepositoryUsingFileAndShortName(
+func GetRepositoryUsingFileAndShortName(
 	//ea_repository_file: Files,
 	eaRepositoryFile *object_model.Files,
 	//short_name: str) \
@@ -71,14 +71,21 @@ func getRepositoryUsingFileAndShortName(
 }
 
 //def get_empty_ea_repository_with_short_name(
-//short_name: str) \
-//-> EaRepositories:
-//ea_repository = \
-//create_empty_ea_repository(
-//short_name=short_name)
-//
-//return \
-//ea_repository
+func GetEmptyEaRepositoryWithShortName(
+	//short_name: str) \
+	shortName string) *objects.EaRepositories { //-> EaRepositories:
+
+	//ea_repository = \
+	eaRepository :=
+		//create_empty_ea_repository(
+		com.CreateEmptyEaRepository(shortName)
+	//short_name=short_name)
+
+	//return \
+	//ea_repository
+	return eaRepository
+
+}
 
 //def __get_short_name():
 //root = \

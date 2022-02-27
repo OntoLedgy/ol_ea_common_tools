@@ -1,1 +1,36 @@
 package creators
+
+import (
+	"github.com/OntoLedgy/ol_ea_common_tools/code/ol_ea_common/objects"
+	"github.com/OntoLedgy/ol_ea_common_tools/code/services/session/orchestrators"
+)
+
+//from nf_ea_common_tools_source.b_code.services.session.orchestrators.ea_tools_session_managers import \
+//EaToolsSessionManagers
+
+//
+//def create_empty_nf_ea_universe(
+func CreateEmptyOlEAUniverse(
+	//ea_tools_session_manager: EaToolsSessionManagers,
+	eaToolsSessionManager orchestrators.EaToolsSessionManagers,
+	//short_name: str):
+	shortName string) *objects.EaRepositories {
+
+	//empty_universe_repository = \
+	emptyUniverseRepository :=
+		//ea_tools_session_manager.create_empty_ea_repository_with_short_name(
+		eaToolsSessionManager.CreateEmptyEaRepositoryWithShortName(
+			"test")
+	//short_name=short_name)
+	//
+	//nf_ea_com_universe_manager = \
+	//ea_tools_session_manager.nf_ea_com_endpoint_manager.nf_ea_com_universe_manager
+	//
+	//empty_nf_ea_com_universe = \
+	//nf_ea_com_universe_manager.nf_ea_com_universe_dictionary[empty_universe_repository]
+	//
+	//return \
+	//empty_nf_ea_com_universe
+	return emptyUniverseRepository
+
+}
