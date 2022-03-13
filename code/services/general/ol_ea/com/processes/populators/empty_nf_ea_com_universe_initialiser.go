@@ -25,20 +25,20 @@ func CreateEmptyOlEaComMapOfCollections() *map[collection_types.OlEaComCollectio
 
 	//database_connection = \
 	databaseConnection :=
+		//__get_database_connection()
 		getDatabaseConnection()
-	//__get_database_connection()
 
 	//dictionary_of_collections = \
-	//__import_tables_from_database(
-	//database_connection=database_connection)
-
 	mapOfCollections :=
+		//__import_tables_from_database(
 		importTablesFromDatabase(
+			//database_connection=database_connection)
 			databaseConnection)
 
 	//return \
 	//dictionary_of_collections
-	defer databaseConnection.Close()
+	databaseConnection.Close()
+
 	return mapOfCollections
 }
 
@@ -48,24 +48,23 @@ func getDatabaseConnection() contract.IDatabases {
 	//module = \
 	//importlib.import_module(
 	//name='nf_ea_common_tools_source.resources.templates')
-
 	//module_path_string = \
 	//module.__path__._path[0]
 
 	//ResourceFullFileName = \
-	//os.path.join(
-	//module_path_string,
 	//TODO - Should be configuration
 	ResourceFullFileName :=
+		//os.path.join(
+		//module_path_string,
 		//'empty_nf_ea_com.accdb')
-		"D:\\S\\go\\src\\github.com\\OntoLedgy\\storage_interop_services\\testing\\data\\empty_ol_ea_com.accdb"
+		"D:\\S\\go\\src\\github.com\\OntoLedgy\\ol_ea_common_tools\\resources\\templates\\empty_ol_ea_com.accdb"
 
 	//database_connection = \
 	databaseConnection :=
+		//__connect_with_access_database(
 		connectWithAccessDatabase(
+			//access_database_full_path=ResourceFullFileName)
 			ResourceFullFileName)
-	//__connect_with_access_database(
-	//access_database_full_path=ResourceFullFileName)
 
 	//return \
 	//database_connection
@@ -85,25 +84,26 @@ func connectWithAccessDatabase(
 	//
 	//connection_string = \
 	//r'Driver={};DBQ={}'.format(access_driver, access_database_full_path)
-	//
-	//database_connection = \
-	//pyodbc.connect(
-	//connection_string)
-	//
-	//return \
-	//database_connection
-	//TODO - wrap this in facade.
 
+	//TODO - wrap this in facade.
 	databaseFactory :=
 		&database_i_o_service.DatabaseFactory{
 			DatabaseName:   resource_full_file_name,
 			DatabaseType:   configurations.DbTypeAccess,
 			SystemDatabase: "C:\\Users\\khanm\\AppData\\Roaming\\Microsoft\\Access\\System.mdw"}
 
+	//database_connection = \
 	database :=
-		databaseFactory.New()
+		databaseFactory.
+			New()
 
-	database.Connect()
+	//pyodbc.connect(
+	//connection_string)
+	database.
+		Connect()
+
+	//return \
+	//database_connection
 
 	return database
 
@@ -115,24 +115,23 @@ func importTablesFromDatabase(
 	databaseConnection contract.IDatabases) *map[collection_types.OlEaComCollectionTypes]*dataframes.DataFrames { //-> dict:
 
 	//table_names_list = \
-	tableNamesList := importTableNamesListFromDatabase(
-		databaseConnection)
-	//__import_table_names_list_from_database(
-	//database_connection=database_connection)
+	tableNamesList :=
+		//__import_table_names_list_from_database(
+		importTableNamesListFromDatabase(
+			//database_connection=database_connection)
+			databaseConnection)
 
 	//dictionary_of_input_dataframes = \
 	mapOfInputDataFrames :=
+		//__get_dictionary_of_tables_from_database(
 		getMapOfTablesFromDatabase(
+			//table_names_list=table_names_list,
 			tableNamesList,
+			//database_connection=database_connection)
 			databaseConnection)
-
-	//__get_dictionary_of_tables_from_database(
-	//table_names_list=table_names_list,
-	//database_connection=database_connection)
 
 	//return \
 	//dictionary_of_input_dataframes
-
 	return mapOfInputDataFrames
 
 }
@@ -145,26 +144,26 @@ func getMapOfTablesFromDatabase(
 	connection contract.IDatabases) *map[collection_types.OlEaComCollectionTypes]*dataframes.DataFrames { //-> dict:
 
 	//dictionary_of_dataframes = \
-	mapOfDataframes := &map[collection_types.OlEaComCollectionTypes]*dataframes.DataFrames{}
-	//{}
+	mapOfDataframes :=
+		//{}
+		&map[collection_types.OlEaComCollectionTypes]*dataframes.DataFrames{}
 
 	//for table_name in table_names_list:
-	for table := tableNamesList.Front(); table != nil; table = table.Next() {
+	for table := tableNamesList.Front(); table.Next() != nil; table = table.Next() {
+
+		//__add_table_to_dictionary(
 		addTableToMap(
+			//table_name=table_name,
 			table,
+			//database_connection=database_connection,
 			connection,
+			//dictionary_of_dataframes=dictionary_of_dataframes)
 			*mapOfDataframes)
 	}
-
-	//__add_table_to_dictionary(
-	//table_name=table_name,
-	//database_connection=database_connection,
-	//dictionary_of_dataframes=dictionary_of_dataframes)
 
 	//return \
 	//dictionary_of_dataframes
 	return mapOfDataframes
-
 }
 
 //def __add_table_to_dictionary(
@@ -186,18 +185,18 @@ func addTableToMap(
 			connection)
 
 	//collection_type = \
-	//NfEaComCollectionTypes.get_collection_type_from_name(
-	//name=table_name)
+	collectionType :=
+		//NfEaComCollectionTypes.get_collection_type_from_name(
+		collection_types.GetCollectionTypeFromName(
+			//name=table_name)
+			table.Value.(string))
 
-	collectionType := collection_types.GetCollectionTypeFromName(table.Value.(string))
-
+	//if not collection_type:
 	if collectionType == nil {
 
-		//if not collection_type:
 		//raise \
 		//NotImplementedError()
 		panic("not implemented collection type")
-
 	}
 
 	//dictionary_of_dataframes[collection_type] = \
@@ -212,30 +211,38 @@ func importTableNamesListFromDatabase(
 	//-> list:
 
 	//table_names_list_name = \
-	//tableNamesListName :=
-	////'table_name_list'
-	//	"table_name_list"
+	tableNamesListTableName := "table_name_list"
+
 	//select_query = \
-	//"SELECT * FROM {}".format(table_names_list_name)
-	//
-	//table_names_dataframe = \
-	tables_slice, _ :=
-		connection.GetTables()
+	selectQuery :=
+		//"SELECT * FROM {}".format(table_names_list_name)
+		"SELECT * FROM " + tableNamesListTableName
 
-	var tables_struct_slice []string
+	var transaction = connection.
+		BeginDatabaseTransaction()
 
-	for _, item := range tables_slice {
-		tables_struct_slice = append(tables_struct_slice, item.Name)
-	}
+	defer transaction.
+		Commit()
 
-	table_names_dataframe :=
-		&dataframes.DataFrames{
-			DataFrame: dataframe.New(
-				series.New(tables_struct_slice, series.String, "Name"))}
+	tables := new([]string)
 
 	//read_sql_query(
 	//select_query,
 	//database_connection)
+	transaction.Select(
+		tables,
+		selectQuery)
+
+	tableNameSeries := series.New(
+		*tables,
+		series.String,
+		"Name")
+
+	//table_names_dataframe = \
+	table_names_dataframe :=
+		&dataframes.DataFrames{
+			DataFrame: dataframe.New(
+				tableNameSeries)}
 
 	//list_of_table_names = \
 	listOfTableNames :=
@@ -260,12 +267,18 @@ func importDataFrameFromDatabase(
 	connection contract.IDatabases) *dataframes.DataFrames {
 	//-> DataFrame:
 
-	transaction := connection.BeginDatabaseTransaction()
+	transaction :=
+		connection.BeginDatabaseTransaction()
+
+	defer transaction.
+		Commit()
 
 	var tableData [][]string
 
 	//select_query = \
-	//"SELECT * FROM {}".format(table_name)
+	selectQuery :=
+		//"SELECT * FROM {}".format(table_name)
+		`SELECT * FROM ` + table
 
 	//dataframe = \
 	//read_sql_query(
@@ -273,10 +286,13 @@ func importDataFrameFromDatabase(
 	//database_connection)
 	transaction.Select(
 		&tableData,
-		`SELECT * FROM $1`, table)
+		selectQuery)
+	//		`SELECT * FROM $1`, table)
 
 	tablesDataFrame := &dataframes.DataFrames{
-		DataFrame: dataframe.LoadRecords(tableData),
+		DataFrame: dataframe.
+			LoadRecords(
+				tableData),
 	}
 
 	//return \

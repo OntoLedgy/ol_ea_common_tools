@@ -34,6 +34,7 @@ func (eaComUniverses *EaComUniverses) Initialise(
 		//ea_project_filename=ea_project_filename)
 		eaProjectFileName)
 
+	//TODO - Generalise this check to IRepository level.
 	//if not isinstance(i_dual_repository_creation_result.i_dual_repository, IDualRepository):
 
 	//log_message(

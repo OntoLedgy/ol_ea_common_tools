@@ -3,6 +3,7 @@ package testing
 import (
 	"fmt"
 	"github.com/OntoLedgy/ol_ea_common_tools/code/services/general/ea/com"
+	"github.com/OntoLedgy/ol_ea_common_tools/code/services/general/ol_ea/com/processes"
 	"github.com/OntoLedgy/ol_ea_common_tools/code/services/general/ol_ea/com/processes/populators"
 	"github.com/OntoLedgy/storage_interop_services/code/services/disk/file_system_service/object_model"
 	"github.com/go-ole/go-ole"
@@ -27,10 +28,16 @@ func TestEASessionManager(t *testing.T) {
 
 func TestInitialiseEmptyComRepository(t *testing.T) {
 
-	ole.CoInitialize(0)
-	defer ole.CoUninitialize()
+	emptyEaComCollection :=
+		populators.CreateEmptyOlEaComMapOfCollections()
 
-	emptyEaComCollection := populators.CreateEmptyOlEaComMapOfCollections()
+	fmt.Println(emptyEaComCollection)
+
+}
+func TestInitialiseEaCom(t *testing.T) {
+
+	emptyEaComCollection :=
+		processes.InitialiseOlEaComMap()
 
 	fmt.Println(emptyEaComCollection)
 

@@ -62,7 +62,7 @@ const (
 //fget=__column_name)
 
 //column_name_mapping = \
-func (olEaComColumnTypes OlEaComColumnTypes) ColumnNames() string {
+func (olEaComColumnTypes OlEaComColumnTypes) ColumnName() string {
 
 	switch olEaComColumnTypes {
 
