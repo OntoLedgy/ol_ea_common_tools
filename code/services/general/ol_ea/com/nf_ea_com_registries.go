@@ -1,6 +1,7 @@
 package com
 
 import (
+	"github.com/OntoLedgy/ol_ea_common_tools/code/services/general/ea/com"
 	"github.com/OntoLedgy/ol_ea_common_tools/code/services/general/ol_ea/com/common_knowledge/collection_types"
 	"github.com/OntoLedgy/ol_ea_common_tools/code/services/general/ol_ea/com/processes/populators"
 	"github.com/OntoLedgy/storage_interop_services/code/services/in_memory/dataframes"
@@ -69,7 +70,8 @@ import (
 //NfRegistries):
 type OlEaComRegistries struct {
 	//OlRegistries
-	DictionaryOfCollections map[collection_types.OlEaComCollectionTypes]*dataframes.DataFrames
+	OwningEaComUniverse com.EaComUniverses
+	MapOfCollections    map[collection_types.OlEaComCollectionTypes]*dataframes.DataFrames
 }
 
 //def __init__(
@@ -83,15 +85,27 @@ type OlEaComRegistries struct {
 
 //def copy(
 //self):
-//self_copy = \
-//NfEaComRegistries(
-//owning_nf_ea_com_universe=self.owning_nf_ea_com_universe)
-//
-//self_copy.dictionary_of_collections = \
-//self.dictionary_of_collections.copy()
-//
-//return \
-//self_copy
+func (r *OlEaComRegistries) Copy() *OlEaComRegistries {
+	//TODO - Needs to be added
+
+	//self_copy = \
+	selfCopy :=
+		//NfEaComRegistries(
+		&OlEaComRegistries{
+			//owning_nf_ea_com_universe=self.owning_nf_ea_com_universe)
+			r.OwningEaComUniverse,
+			r.MapOfCollections}
+
+	//self_copy.dictionary_of_collections = \
+	//self.dictionary_of_collections.copy()
+	for key, value := range r.MapOfCollections {
+		selfCopy.MapOfCollections[key] = value
+	}
+	//return \
+	//self_copy
+
+	return selfCopy
+}
 
 //def create_model_stats_tables(
 //self):
@@ -447,6 +461,7 @@ type OlEaComRegistries struct {
 //def initialise_empty_nf_ea_com_universe(
 //self) \
 //-> None:
+
 func (r OlEaComRegistries) InitialiseEmptyOlEaComUniverse() {
 
 	//dictionary_of_collections = \
@@ -456,7 +471,7 @@ func (r OlEaComRegistries) InitialiseEmptyOlEaComUniverse() {
 			CreateEmptyOlEaComMapOfCollections()
 
 	//self.dictionary_of_collections = \
-	r.DictionaryOfCollections =
+	r.MapOfCollections =
 		*DictionaryOfCollections
 	//dictionary_of_collections
 

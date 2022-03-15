@@ -98,9 +98,9 @@ func (EaComUniverses) close_project() {
 	//log_message(
 	//"Closing EA Project: " +
 	//self.i_dual_repository.instance_guid)
-	//
+
 	//self.i_dual_repository.exit()
-	//
+
 	//log_message(
 	//"EA Project Closed")
 }

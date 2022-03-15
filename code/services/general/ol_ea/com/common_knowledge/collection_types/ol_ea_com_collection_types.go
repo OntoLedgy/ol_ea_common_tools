@@ -95,7 +95,6 @@ func GetCollectionTypeFromName(
 	for collection_type, collection_name := range collection_name_mapping {
 		//if collection_name == name:
 		if collection_name == name {
-
 			//return \
 			//collection_type
 			return &collection_type
@@ -103,19 +102,6 @@ func GetCollectionTypeFromName(
 	}
 	return nil
 }
-
-//def __collection_name(
-//self) \
-//-> str:
-//collection_name = \
-//collection_name_mapping[self]
-//
-//return \
-//collection_name
-
-//collection_name = \
-//property(
-//fget=__collection_name)
 
 //collection_name_mapping = \
 var collection_name_mapping = map[OlEaComCollectionTypes]string{
@@ -193,7 +179,20 @@ var collection_name_mapping = map[OlEaComCollectionTypes]string{
 	MODEL_STATS_HIGH_ORDER_TYPES_ROOTS:          "HOT_roots",
 	MODEL_STATS_HIGH_ORDER_TYPES_IMPLICIT_EDGES: "HOT_implicit_edges"}
 
-func (olEaCollectionTypes OlEaComCollectionTypes) String() string {
+func (olEaCollectionTypes OlEaComCollectionTypes) CollectionName() string {
+
+	//def __collection_name(
+	//self) \
+	//-> str:
+	//collection_name = \
+	//collection_name_mapping[self]
+	//
+	//return \
+	//collection_name
+
+	//collection_name = \
+	//property(
+	//fget=__collection_name)
 
 	switch olEaCollectionTypes {
 	case EA_PACKAGES:

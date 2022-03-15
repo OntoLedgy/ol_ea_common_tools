@@ -19,8 +19,8 @@ import (
 type OlEaComUniverseManagers struct {
 	//NfManagers):
 	orchestrators.OlManagers
-	EaToolsSessionManager  session_orchestrators.EaToolsSessionManagers
-	nf_ea_com_universe_map map[string]string
+	EaToolsSessionManager session_orchestrators.EaToolsSessionManagers
+	OlEaComUniverseMap    map[*objects.EaRepositories]*com.OlEaComUniverses
 }
 
 //def __init__(

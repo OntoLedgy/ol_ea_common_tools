@@ -154,6 +154,7 @@ func InitialiseOlEaComMap() *map[collection_types.OlEaComCollectionTypes]*datafr
 			)}
 
 	//TODO : discuss with Andy
+
 	////nf_ea_com_dictionary['ea_attributes_order'] = \
 	//OlEaComDictionary["ea_attributes_order"] =
 	////DataFrame(

@@ -26,9 +26,9 @@ type EaComManagers struct {
 func GetEaRepositoryFile() *object_model.Files { //-> Files:
 
 	//file = \
-	//select_file()
-
-	file := file_system_service.SelectFile()
+	file :=
+		//select_file()
+		file_system_service.SelectFile()
 
 	//return \
 	//file

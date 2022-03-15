@@ -10,6 +10,7 @@ package com
 import (
 	"github.com/OntoLedgy/ol_ea_common_tools/code/ol_ea_common/objects"
 	"github.com/OntoLedgy/ol_ea_common_tools/code/services/session/orchestrators"
+	"github.com/OntoLedgy/ol_ea_common_tools/code/services/session/processes/creators"
 )
 
 //class NfEaComUniverses:
@@ -59,27 +60,44 @@ func (olEaComUniverses *OlEaComUniverses) Initialise(
 
 //def copy(
 //self,
-//short_name=str()):
-//ea_repository_copy = \
-//EaRepositories(
-//short_name=short_name,
-//ea_repository_file=self.ea_repository.ea_repository_file)
-//
-//self_copy = \
-//NfEaComUniverses(
-//ea_tools_session_manager=self.ea_tools_session_manager,
-//ea_repository=ea_repository_copy)
-//
-//self_copy.nf_ea_com_registry = \
-//self.nf_ea_com_registry.copy()
-//
-//register_universe_copy(
-//ea_tools_session_manager=self.ea_tools_session_manager,
-//nf_ea_com_universe=self_copy,
-//ea_repository_copy=ea_repository_copy)
-//
-//return \
-//self_copy
+func (olEaComUniverses *OlEaComUniverses) Copy(
+	//short_name=str()):
+	shortName string) *OlEaComUniverses {
+
+	//ea_repository_copy = \
+	eaRepositoryCopy :=
+		//EaRepositories(
+		&objects.EaRepositories{
+			//short_name=short_name,
+			ShortName: shortName,
+			//ea_repository_file=self.ea_repository.ea_repository_file)
+			EaRepositoryFile: olEaComUniverses.EaRepositories.EaRepositoryFile}
+
+	//self_copy = \
+	selfCopy :=
+		//NfEaComUniverses(
+		&OlEaComUniverses{
+			//ea_tools_session_manager=self.ea_tools_session_manager,
+			olEaComUniverses.EaToolsSessionManagers,
+			//ea_repository=ea_repository_copy)
+			eaRepositoryCopy,
+			//self_copy.nf_ea_com_registry = \
+			//self.nf_ea_com_registry.copy()
+			olEaComUniverses.OlEaComRegistries.Copy()}
+
+	//register_universe_copy(
+	creators.RegisterUniverseCopy(
+		//ea_tools_session_manager=self.ea_tools_session_manager,
+		olEaComUniverses.EaToolsSessionManager,
+		//nf_ea_com_universe=self_copy,
+		selfCopy,
+		//ea_repository_copy=ea_repository_copy)
+		eaRepositoryCopy)
+
+	//return \
+	//self_copy
+	return selfCopy
+}
 
 //def export_dataframes(
 //self,
