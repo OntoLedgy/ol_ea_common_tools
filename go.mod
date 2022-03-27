@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/OntoLedgy/ea_interop_service v0.0.5
-	github.com/OntoLedgy/ol_common_services v0.0.5
+	github.com/OntoLedgy/ol_common_services v0.0.8
 	github.com/OntoLedgy/storage_interop_services v0.0.25
 	github.com/go-gota/gota v0.12.0
 	github.com/go-ole/go-ole v1.2.6
@@ -28,7 +28,7 @@ require (
 	github.com/sqweek/dialog v0.0.0-20220227145630-7a1c9e333fcf // indirect
 	github.com/tobgu/qframe v0.3.6 // indirect
 	golang.org/x/net v0.0.0-20220225172249-27dd8689420f // indirect
-	golang.org/x/sys v0.0.0-20220310020820-b874c991c1a5 // indirect
+	golang.org/x/sys v0.0.0-20220318055525-2edf467146b5 // indirect
 	golang.org/x/text v0.3.7 // indirect
-	gonum.org/v1/gonum v0.9.3 // indirect
+	gonum.org/v1/gonum v0.11.0 // indirect
 )

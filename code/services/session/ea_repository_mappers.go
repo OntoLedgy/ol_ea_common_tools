@@ -1,7 +1,9 @@
+//https://github.com/boro-alpha/nf_ea_common_tools/blob/master/nf_ea_common_tools_source/b_code/services/session/ea_repository_mappers.py
 package session
 
 import (
 	"github.com/OntoLedgy/ea_interop_service/code/i_dual_objects"
+	"github.com/OntoLedgy/ol_common_services/code/ol/golang_extensions/collections"
 	"github.com/OntoLedgy/ol_ea_common_tools/code/ol_ea_common/objects"
 )
 
@@ -9,6 +11,8 @@ import (
 type EaRepositoryMappers struct {
 	//__map = \
 	//NfBimappings({})
+
+	olBimapping collections.OlBimappings
 }
 
 //def __enter__(
@@ -25,35 +29,36 @@ type EaRepositoryMappers struct {
 
 //@staticmethod
 //def store_map(
-func (EaRepositoryMappers) store_map(
+func (eaRepositoryMapper EaRepositoryMappers) StoreMap(
 	//ea_repository: EaRepositories,
-	ea_repository *objects.EaRepositories,
+	eaRepository *objects.EaRepositories,
 	//i_dual_repository: IDualRepository):
-	i_dual_repository i_dual_objects.IDualRepository) {
+	iDualRepository i_dual_objects.IDualRepository) {
 
-	//TODO add mapping
 	//EaRepositoryMappers.__map.add_mapping(
-	//domain_value=ea_repository,
-	//range_value=i_dual_repository)
-
+	eaRepositoryMapper.olBimapping.AddMapping(
+		//domain_value=ea_repository,
+		eaRepository,
+		//range_value=i_dual_repository)
+		iDualRepository)
 }
 
 //@staticmethod
 //def get_i_dual_repository(
-func get_i_dual_repository(
+func (eaRepositoryMapper EaRepositoryMappers) GetIDualRepository(
 	//ea_repository: EaRepositories
 	ea_repository objects.EaRepositories) *i_dual_objects.IDualRepository {
 
 	//i_dual_repository = \
-	i_dual_repository :=
-		&i_dual_objects.IDualRepository{}
-	//TODO - implement map
-	//EaRepositoryMappers.__map.try_get_range_using_domain(
-	//domain_key=ea_repository).value
+	iDualRepository :=
+		//EaRepositoryMappers.__map.try_get_range_using_domain(
+		eaRepositoryMapper.olBimapping.TryGetRangeUsingDomain(
+			//domain_key=ea_repository).value
+			ea_repository).(i_dual_objects.IDualRepository)
 
 	//return \
 	//i_dual_repository
-	return i_dual_repository
+	return &iDualRepository
 }
 
 //@staticmethod
@@ -61,9 +66,9 @@ func get_i_dual_repository(
 func close_all_ea_repositories() {
 
 	//for i_dual_repository in EaRepositoryMappers.__map.get_range():
-
 	//i_dual_repository.exit()
 
 	//EaRepositoryMappers.__map = \
 	//NfBimappings({})
+
 }

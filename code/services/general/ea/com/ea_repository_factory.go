@@ -57,11 +57,11 @@ func CreateEaRepository(
 
 }
 
-func CreateEmptyEaRepository(short_name string) *objects.EaRepositories {
+func CreateEmptyEaRepository(shortName string) *objects.EaRepositories {
 
 	eaRepository := new(objects.EaRepositories)
 
-	eaRepository.ShortName = short_name
+	eaRepository.ShortName = shortName
 
 	return eaRepository
 

@@ -2,9 +2,12 @@ package testing
 
 import (
 	"fmt"
+	"github.com/OntoLedgy/ea_interop_service/code/i_dual_objects"
+	"github.com/OntoLedgy/ol_ea_common_tools/code/ol_ea_common/objects"
 	"github.com/OntoLedgy/ol_ea_common_tools/code/services/general/ea/com"
 	"github.com/OntoLedgy/ol_ea_common_tools/code/services/general/ol_ea/com/processes"
 	"github.com/OntoLedgy/ol_ea_common_tools/code/services/general/ol_ea/com/processes/populators"
+	"github.com/OntoLedgy/ol_ea_common_tools/code/services/session"
 	"github.com/OntoLedgy/storage_interop_services/code/services/disk/file_system_service/object_model"
 	"github.com/go-ole/go-ole"
 	"testing"
@@ -40,5 +43,19 @@ func TestInitialiseEaCom(t *testing.T) {
 		processes.InitialiseOlEaComMap()
 
 	fmt.Println(emptyEaComCollection)
+
+}
+
+//TODO add eaRepositoryMapper test
+func TestEARepositoryMapper(t *testing.T) {
+
+	eaRepositoryMapper := session.EaRepositoryMappers{}
+
+	eaRepository := &objects.EaRepositories{}
+	iDualRepository := i_dual_objects.IDualRepository{}
+
+	eaRepositoryMapper.StoreMap(
+		eaRepository,
+		iDualRepository)
 
 }

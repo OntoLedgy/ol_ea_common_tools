@@ -2,12 +2,14 @@ package collection_types
 
 //from enum import auto
 //from enum import unique
+
 //from nf_common_source.code.nf.types.collection_types import CollectionTypes
+import "github.com/OntoLedgy/ol_common_services/code/ol/types"
 
 //@unique
 //class NfEaComCollectionTypes(
 //CollectionTypes):
-type OlEaComCollectionTypes int
+type OlEaComCollectionTypes types.CollectionTypes
 
 const (
 	EA_PACKAGES OlEaComCollectionTypes = iota

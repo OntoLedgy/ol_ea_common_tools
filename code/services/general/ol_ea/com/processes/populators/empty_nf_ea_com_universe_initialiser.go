@@ -247,7 +247,7 @@ func importTableNamesListFromDatabase(
 	//list_of_table_names = \
 	listOfTableNames :=
 		lists.Lists{
-			*list.New()}
+			list.New()}
 
 	//table_names_dataframe['name'].tolist()
 	for _, table := range table_names_dataframe.Col("Name").Records() {
