@@ -9,17 +9,17 @@ import (
 
 //class EaRepositoryMappers:
 type EaRepositoryMappers struct {
+
 	//__map = \
 	//NfBimappings({})
-
-	olBimapping collections.OlBimappings
+	olBimapping *collections.OlBimappings
 }
 
 //def __enter__(
 //self):
 //return \
 //self
-//
+
 //def __exit__(
 //self,
 //exception_type,
@@ -29,11 +29,17 @@ type EaRepositoryMappers struct {
 
 //@staticmethod
 //def store_map(
-func (eaRepositoryMapper EaRepositoryMappers) StoreMap(
+func (eaRepositoryMapper *EaRepositoryMappers) StoreMap(
 	//ea_repository: EaRepositories,
 	eaRepository *objects.EaRepositories,
 	//i_dual_repository: IDualRepository):
 	iDualRepository i_dual_objects.IDualRepository) {
+
+	eaRepositoryMapper.olBimapping =
+		new(collections.OlBimappings)
+
+	eaRepositoryMapper.olBimapping.Initialise(
+		nil)
 
 	//EaRepositoryMappers.__map.add_mapping(
 	eaRepositoryMapper.olBimapping.AddMapping(
@@ -45,7 +51,7 @@ func (eaRepositoryMapper EaRepositoryMappers) StoreMap(
 
 //@staticmethod
 //def get_i_dual_repository(
-func (eaRepositoryMapper EaRepositoryMappers) GetIDualRepository(
+func (eaRepositoryMapper *EaRepositoryMappers) GetIDualRepository(
 	//ea_repository: EaRepositories
 	ea_repository objects.EaRepositories) *i_dual_objects.IDualRepository {
 
@@ -63,7 +69,7 @@ func (eaRepositoryMapper EaRepositoryMappers) GetIDualRepository(
 
 //@staticmethod
 //def close_all_ea_repositories():
-func close_all_ea_repositories() {
+func (eaRepositoryMapper *EaRepositoryMappers) CloseAllEaRepositories() {
 
 	//for i_dual_repository in EaRepositoryMappers.__map.get_range():
 	//i_dual_repository.exit()

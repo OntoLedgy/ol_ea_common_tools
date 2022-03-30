@@ -37,6 +37,7 @@ func TestInitialiseEmptyComRepository(t *testing.T) {
 	fmt.Println(emptyEaComCollection)
 
 }
+
 func TestInitialiseEaCom(t *testing.T) {
 
 	emptyEaComCollection :=
@@ -46,16 +47,17 @@ func TestInitialiseEaCom(t *testing.T) {
 
 }
 
-//TODO add eaRepositoryMapper test
 func TestEARepositoryMapper(t *testing.T) {
 
 	eaRepositoryMapper := session.EaRepositoryMappers{}
 
 	eaRepository := &objects.EaRepositories{}
+
 	iDualRepository := i_dual_objects.IDualRepository{}
 
 	eaRepositoryMapper.StoreMap(
 		eaRepository,
 		iDualRepository)
 
+	fmt.Println(eaRepositoryMapper)
 }

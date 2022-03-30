@@ -28,7 +28,7 @@ func GetEaRepositoryFile() *object_model.Files { //-> Files:
 	//file = \
 	file :=
 		//select_file()
-		file_system_service.SelectFile()
+		file_system_service.SelectFile("select EA Repository File")
 
 	//return \
 	//file
